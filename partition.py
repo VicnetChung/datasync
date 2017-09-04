@@ -82,16 +82,19 @@ def get_filesystem_type(host_ip, device):
             return inf['partitions'][0]['fstype']
 
 
-def mount(host_ip, src, path):
+def mount(host_ip, src, path, partition=1):
     """
 
     :param host_ip:string
-    :param src: string
+    :param src: string, disk device name without partition number
     :param path: string
+    :param partition: default partition 1
     :return:
     """
     fstype = get_filesystem_type(host_ip, src)
-    action = dict(module='mount', src=src, path=path,fstype=fstype, state='mounted')
+    #
+    _src = src + str(partition)
+    action = dict(module='mount', src=_src, path=path,fstype=fstype, state='mounted')
     res = order_run(host_ip, action)
     if not any(res.host):
         return 'Failed: %s is not founded' % host_ip
@@ -107,14 +110,16 @@ def mount(host_ip, src, path):
             return "Success: %s, %s is mounted on %s" % (host_ip, src, path)
 
 
-def umount(host_ip, src, path):
+def umount(host_ip, src, path, partition=1):
     """
 
     :param host_ip:string
     :param src: string
     :param path: string
+    :param partition: partition number, default 1
     :return:
     """
+    _src = src + str(partition)
     action = dict(module='mount', path=path, state='unmounted')
     res = order_run(host_ip, action)
     if not any(res.host):
@@ -128,7 +133,7 @@ def umount(host_ip, src, path):
             stderr += str(inf.get('msg', '')).strip()
             return stderr
         else:
-            return "Success: %s, %s is unmounted from %s" % (host_ip, src, path)
+            return "Success: %s, %s is unmounted from %s" % (host_ip, _src, path)
 
 
 # device uuid
