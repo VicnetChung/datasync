@@ -1,0 +1,6 @@
+- hosts: aliyunif
+  remote_user: root
+  sudo: yes
+  tasks:
+   - name: oss_image
+     script: ./oss_image.sh
