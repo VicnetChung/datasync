@@ -18,21 +18,20 @@ def write_res(resource, host):
     with open(filename, 'w') as file_object:
         file_object.write(lines)
 
-
-# if __name__ == "__main__":
-#     resource = str(sys.argv[1])
-#     hty_name = str(sys.argv[2])
-#     drbd_device = '/dev/drbd' + str(resource).strip('r')
-#     hty_disk_device = str(sys.argv[3]) + '1'
-#     hty_ip = str(sys.argv[4])
-#     hty_port = str(sys.argv[5])
-#     pub_name = str(sys.argv[6])
-#     pub_disk_device = str(sys.argv[7]) + '1'
-#     pub_ip = str(sys.argv[8])
-#     pub_port = str(sys.argv[9])
-#     hty = {'hostname': hty_name, 'device': drbd_device,
-#              'disk': hty_disk_device, 'address': hty_ip, 'port': hty_port}
-#     pub = {'hostname': pub_name, 'device': drbd_device,
-#              'disk': pub_disk_device, 'address': pub_ip, 'port': pub_port}
-#     host = [hty, pub]
-#     write_res(resource, host)
+if __name__ == "__main__":
+    resource = str(sys.argv[1])
+    hty_name = str(sys.argv[2])
+    drbd_device = '/dev/drbd' + str(resource).strip('r')
+    hty_disk_device = str(sys.argv[3]) + '1'
+    hty_ip = str(sys.argv[4])
+    hty_port = str(sys.argv[5])
+    pub_name = str(sys.argv[6])
+    pub_disk_device = str(sys.argv[7]) + '1'
+    pub_ip = str(sys.argv[8])
+    pub_port = str(sys.argv[9])
+    hty = {'hostname': hty_name, 'device': drbd_device,
+             'disk': hty_disk_device, 'address': hty_ip, 'port': hty_port}
+    pub = {'hostname': pub_name, 'device': drbd_device,
+             'disk': pub_disk_device, 'address': pub_ip, 'port': pub_port}
+    host = [hty, pub]
+    write_res(resource, host)
