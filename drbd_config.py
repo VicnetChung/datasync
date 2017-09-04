@@ -85,7 +85,7 @@ def init_config(host_ip):
 
 
 def wirte_resource(host_ip, resource, hty_name, hty_disk_device, hty_ip, hty_port,
-                   pub_name, pub_disk_device, pub_ip, pub_port):
+                   pub_name, pub_disk_device, pub_ip, pub_port, hty_partition=1, pub_partition=1):
     """
 
     :param host_ip:
@@ -100,9 +100,9 @@ def wirte_resource(host_ip, resource, hty_name, hty_disk_device, hty_ip, hty_por
     :param pub_port:
     :return:
     """
-    res_args = str(resource) + ' ' + str(hty_name) + ' ' + str(hty_disk_device) \
+    res_args = str(resource) + ' ' + str(hty_name) + ' ' + str(hty_disk_device) +str(hty_partition) \
               + ' ' + str(hty_ip) + ' ' + str(hty_port) + ' ' + str(pub_name) \
-              + ' ' + str(pub_disk_device) + ' ' + str(pub_ip) + ' ' + str(pub_port)
+              + ' ' + str(pub_disk_device) + str(pub_partition) + ' ' + str(pub_ip) + ' ' + str(pub_port)
     _args = 'python /etc/hty/write_res.py ' + res_args
     action = dict(module='command', args=_args)
     res = order_run(host_ip, action)
