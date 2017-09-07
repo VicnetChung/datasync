@@ -3,7 +3,7 @@
 
 
 from exec_ansible import order_run
-
+import time
 
 def get_remote_hostname(host_ip):
     """
@@ -58,6 +58,15 @@ def get_remote_port(host_ip):
             except ValueError, e:
                 return e
 
+ def set_resource_name():
+    """
+    to avoid use the same resource name, we use the  current time in seconds
+     since the Epoch as the resource name
+    :return:
+    """
+    num = int(time.time())
+    name = 'r' + str(num)
+    print name
 
 def init_config(host_ip):
     """
