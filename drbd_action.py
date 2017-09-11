@@ -44,7 +44,7 @@ def start_drbd(host_ip):
         return 'Failed:  %s no found' % host_ip
     for hostname, result in res.host.items():
         inf = result._result
-        print json.dumps({hostname: inf}, indent=4)
+#        print json.dumps({hostname: inf}, indent=4)
         if inf.get('unreachable', 0):
             return "Failed: %s is unreachable" % host_ip
         elif inf.get('failed', 0):
