@@ -129,7 +129,7 @@ def wirte_resource(host_ip, resource, hty_name, hty_disk_device, hty_ip, hty_por
             return "Success: %s, write the resource configuration successful" % host_ip
 
 
-def add_config(host_ip, resource):
+def add_resource(host_ip, resource):
     """
 
     :param host_ip:
@@ -152,3 +152,30 @@ def add_config(host_ip, resource):
             return stderr
         else:
             return "Success: %s, add %s to file: drbd.conf successful " % (host_ip, resource)
+        
+        
+        
+def del_resource(host_ip, resource):
+    """
+
+    :param host_ip:
+    :param resource:
+    :return:
+    """
+    _args = 'python /etc/hty/del_resource.py ' + str(resource)
+    action = dict(module='command', args=_args)
+    res = order_run(host_ip, action)
+    if not any(res.host):
+        return 'Failed:  %s no found' % host_ip
+    for hostname, result in res.host.items():
+        inf = result._result
+        if inf.get('unreachable', 0):
+            return "Failed: %s is unreachable" % host_ip
+        elif inf.get('failed', 0):
+            stderr = "Failed: %s, " % host_ip
+            for fail_inf in inf['stdout_lines']:
+                stderr = stderr + fail_inf
+            return stderr
+        else:
+            return "Success: %s, delete %s to file: drbd.conf successful " % (host_ip, resource)
+
