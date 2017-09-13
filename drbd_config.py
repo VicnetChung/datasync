@@ -58,7 +58,7 @@ def get_remote_port(host_ip):
             except ValueError, e:
                 return e
 
- def set_resource_name():
+def set_resource_name():
     """
     to avoid use the same resource name, we use the  current time in seconds
      since the Epoch as the resource name
@@ -66,7 +66,7 @@ def get_remote_port(host_ip):
     """
     num = int(time.time())
     name = 'r' + str(num)
-    print name
+    return  name
 
 def init_config(host_ip):
     """
