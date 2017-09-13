@@ -10,7 +10,7 @@ def add_ansible_host(host_ip, user, password):
     before_ungrouped = 'Ungrouped hosts'
     file_path = '/etc/ansible/hosts'
     tmp_file_path = file_path + ".tmp"
-    with open(file_path,'r')as file_obj:
+    with open(file_path,'r') as file_obj:
         lines = file_obj.readlines()
         with open(tmp_file_path,'w') as tmp_file_obj:
             for line in lines:
